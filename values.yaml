@@ -1,0 +1,4 @@
+wiremock:
+  consumer:
+    stubs:
+      wjmolina-wiremock: wjmolina-wiremock

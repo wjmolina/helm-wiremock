@@ -1,0 +1,7 @@
+apiVersion: v2
+name: wjmolina-wiremock
+version: 0.1.0
+dependencies:
+  - name: wiremock
+    repository: https://charts.deliveryhero.io/
+    version: 1.4.1
