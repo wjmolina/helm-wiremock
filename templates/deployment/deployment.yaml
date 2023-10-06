@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hyak-wiremock-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hyak-wiremock
+  template:
+    metadata:
+      labels:
+        app: hyak-wiremock
+    spec:
+      containers:
+        - name: hyak-wiremock-container
+          image: wiremock/wiremock:3.1.0
+          volumeMounts:
+            - name: mappings
+              mountPath: /home/wiremock/mappings
+            - name: files
+              mountPath: /home/wiremock/__files
+          resources:
+            limits:
+              cpu: "0.5"
+              memory: 512Mi
+            requests:
+              cpu: "0.1"
+              memory: 256Mi
+      volumes:
+        - name: mappings
+          configMap:
+            name: hyak-wiremock-mappings
+        - name: files
+          configMap:
+            name: hyak-wiremock-files
