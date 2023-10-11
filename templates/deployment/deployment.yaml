@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: hyak-wiremock-deployment
+  name: {{ .Release.Name }}-wiremock-deployment
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: hyak-wiremock
+      app: {{ .Release.Name }}-wiremock
   template:
     metadata:
       labels:
-        app: hyak-wiremock
+        app: {{ .Release.Name }}-wiremock
     spec:
       containers:
-        - name: hyak-wiremock-container
-          image: wiremock/wiremock:3.1.0
+        - name: {{ .Release.Name }}-wiremock-container
+          image: holomekc/wiremock-gui:3.2.0.0
           args:
             - --enable-browser-proxying
           volumeMounts:
@@ -32,7 +32,7 @@ spec:
       volumes:
         - name: mappings
           configMap:
-            name: hyak-wiremock-mappings
+            name: {{ .Release.Name }}-wiremock-mappings
         - name: files
           configMap:
-            name: hyak-wiremock-files
+            name: {{ .Release.Name }}-wiremock-files
